@@ -1,11 +1,16 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs.kotlin")
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
     namespace = "pl.ozodbek.datastorepractice"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "pl.ozodbek.datastorepractice"
@@ -33,15 +38,39 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
 }
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // Navigation Component
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+    implementation("android.arch.navigation:navigation-fragment-ktx:1.0.0")
+
+    //Hilt
+    implementation("com.google.dagger:hilt-android:2.48.1")
+    ksp("com.google.dagger:dagger-compiler:2.48.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.48.1")
+    implementation("androidx.hilt:hilt-navigation-fragment:1.1.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib: 1.9.0")
+
+    // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+
 }
