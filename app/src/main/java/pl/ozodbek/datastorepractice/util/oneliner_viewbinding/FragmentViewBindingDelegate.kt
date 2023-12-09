@@ -1,4 +1,4 @@
-package pl.ozodbek.profex.util.oneliner_viewbinding
+package pl.ozodbek.datastorepractice.util.oneliner_viewbinding
 
 import android.view.View
 import androidx.fragment.app.Fragment

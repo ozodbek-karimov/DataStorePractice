@@ -1,9 +1,7 @@
-package pl.ozodbek.todo.utils
+package pl.ozodbek.datastorepractice.util
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
@@ -21,12 +20,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.textfield.TextInputEditText
+import com.redmadrobot.inputmask.MaskedTextChangedListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import pl.ozodbek.todo.R
-import pl.ozodbek.todo.databinding.CustomDialogBinding
+import pl.ozodbek.datastorepractice.R
 
 fun Fragment.changeFragmentTo(destination: Any) {
     val navController = this.findNavController()
@@ -148,35 +148,6 @@ fun <T : ViewBinding> Fragment.inflateViewBinding(
     return bindingInflater.invoke(LayoutInflater.from(requireContext()))
 }
 
-fun Fragment.buildDialog(
-    titleRes: String,
-    messageRes: String,
-    positiveButtonAction: () -> Unit
-) {
-    val binding = CustomDialogBinding.inflate(LayoutInflater.from(requireActivity()))
-    val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-        .setView(binding.root)
-
-    val dialog = builder.create().apply {
-        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        binding.deleteTitle.text = titleRes
-        binding.deleteItem.text = messageRes
-        setCancelable(false)
-    }
-
-    binding.apply {
-        yesButton.onClick {
-            positiveButtonAction()
-            dialog.dismiss()
-        }
-
-        noButton.onClick {
-            dialog.dismiss()
-        }
-        dialog.show()
-    }
-}
-
 fun ViewModel.viewModelScopeOnIOThread(
     block: suspend CoroutineScope.() -> Unit,
 ) = viewModelScope.launch(Dispatchers.IO) {
@@ -188,5 +159,39 @@ fun ViewModel.viewModelScopeOnDefaultThread(
 ) = viewModelScope.launch {
     block()
 }
+
+
+fun TextInputEditText.setMask(mask: String, onUnmaskedString: (String?) -> Unit) {
+    val listener = MaskedTextChangedListener(
+        mask,
+        false,
+        this@setMask,
+        null,
+        object : MaskedTextChangedListener.ValueListener {
+            override fun onTextChanged(
+                maskFilled: Boolean,
+                extractedValue: String,
+                formattedValue: String,
+                tailPlaceholder: String,
+            ) {
+                onUnmaskedString(extractedValue)
+            }
+        }
+    )
+
+    this@setMask.addTextChangedListener(listener)
+    this@setMask.setHintTextColor(getColor(R.color.lightMediumGray))
+    this@setMask.setText("")
+    listener.autoskip = true
+}
+
+
+fun View.getColor(color: Int): Int {
+    return ContextCompat.getColor(this.context, color)
+}
+
+
+
+
 
 

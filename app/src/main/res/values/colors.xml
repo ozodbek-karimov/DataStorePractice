@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#6200EA</color>
+    <color name="colorPrimaryDark">#5502C8</color>
+    <color name="colorAccent">#9D46FF</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="pro_gray">#8794A6</color>
+    <color name="lightGray">#F9F9F9</color>
+    <color name="lightGray2">#E8E8E8</color>
+    <color name="mediumGray">#D1D1D1</color>
+    <color name="lightMediumGray">#80D1D1D1</color>
+    <color name="lightMediumGray2">#80201F1F</color>
+    <color name="darkGray">#4B4B4B</color>
+    <color name="dark">#313C44</color>
+    <color name="darker">#151B20</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF4646</color>
+    <color name="yellow">#FFC114</color>
+    <color name="orange">#FF6917</color>
+    <color name="green">#00C980</color>
+    <color name="green_back">#11E195</color>
+    <color name="phone_call_color">#0B9A15</color>
+    <color name="darkgreen">#048053</color>
+    <color name="up_button_color">#EB313C44</color>
+
+
+    <color name="gray">#1B1616</color>
+    <color name="backgroundColor">#313C44</color>
+    <color name="cardViewColor">#A6151B20</color>
+    <color name="bottomline_color">#3A3838</color>
+    <color name="custom_text_color">#736D6D</color>
+    <color name="edge_effect_color">#99F9F9F9</color>
+    <color name="custom_text_color1">#CCC5C5</color>
+    <color name="blue">#03A9F4</color>
+    <color name="dark_blue">#0485BF</color>
+    <color name="blue2">#88D0F1</color>
+    <color name="light_red">#BC3232</color>
+    <color name="custom">#152A40</color>
+    <color name="night">#EF0ADC</color>
+    <color name="emptyBoxColor">#36454F</color>
+    <color name="black_real">#000000</color>
+    <color name="red_real">#FF4646</color>
+    <color name="permission_background">#052040</color>
+
 </resources>

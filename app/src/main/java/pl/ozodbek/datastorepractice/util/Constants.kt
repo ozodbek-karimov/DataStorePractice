@@ -1,18 +1,11 @@
-package pl.ozodbek.todo.utils
+package pl.ozodbek.datastorepractice.util
 
 class Constants {
 
     companion object {
 
-        /** CUSTOM COLORS */
-        const val COLOR_RED = "#FF4646"
-        const val COLOR_YELLOW = "#FFC114"
-        const val COLOR_GREEN = "#00C980"
+        const val MASK_FOR_PHONE_NUMBER_INPUT = "([00]) [000]-[00]-[00]"
 
-
-        /** ROOM Database*/
-        const val TODO_TABLE_NAME = "todo_table"
-        const val DATABASE_NAME = "todo_database"
     }
 
 

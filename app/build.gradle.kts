@@ -55,10 +55,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    // Navigation Component
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
-    implementation("android.arch.navigation:navigation-fragment-ktx:1.0.0")
 
     //Hilt
     implementation("com.google.dagger:hilt-android:2.48.1")
@@ -72,5 +68,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+
+    //Masked Edittext
+    implementation("com.redmadrobot:input-mask-android:7.2.4")
 
 }

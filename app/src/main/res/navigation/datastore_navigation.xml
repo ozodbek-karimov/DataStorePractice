@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/datastore_navigation"
-    app:startDestination="@id/placeholder">
+    app:startDestination="@id/dataViewerFragment">
 
-    <fragment android:id="@+id/placeholder" />
+    <fragment
+        android:id="@+id/dataViewerFragment"
+        android:name="pl.ozodbek.datastorepractice.ui.DataViewerFragment"
+        android:label="fragment_data_viewer"
+        tools:layout="@layout/fragment_data_viewer" />
 </navigation>
