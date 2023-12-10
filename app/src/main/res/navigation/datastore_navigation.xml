@@ -3,11 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/datastore_navigation"
-    app:startDestination="@id/dataViewerFragment">
+    app:startDestination="@id/dataSavingFragment">
 
+    <fragment
+        android:id="@+id/dataSavingFragment"
+        android:name="pl.ozodbek.datastorepractice.ui.DataSavingFragment"
+        android:label="fragment_data_viewer"
+        tools:layout="@layout/fragment_data_saving" >
+        <action
+            android:id="@+id/action_dataSavingFragment_to_dataViewerFragment"
+            app:destination="@id/dataViewerFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
     <fragment
         android:id="@+id/dataViewerFragment"
         android:name="pl.ozodbek.datastorepractice.ui.DataViewerFragment"
         android:label="fragment_data_viewer"
-        tools:layout="@layout/fragment_data_viewer" />
+        tools:layout="@layout/fragment_data_viewer" >
+        <action
+            android:id="@+id/action_dataViewerFragment_to_dataSavingFragment"
+            app:destination="@id/dataSavingFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
+    </fragment>
 </navigation>
