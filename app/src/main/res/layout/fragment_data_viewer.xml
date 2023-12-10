@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/custom"
     android:layout_height="match_parent"
+    android:background="@color/custom"
     tools:context=".ui.DataViewerFragment">
-
 
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -41,22 +40,18 @@
         app:errorEnabled="true"
         app:errorIconDrawable="@null"
         app:hintTextColor="@color/dark_blue"
-        app:layout_constraintBottom_toTopOf="@+id/clear_button"
+        app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287"
-        app:prefixText="+998"
-        app:prefixTextAppearance="@style/PrefixTextAppearance"
-        app:prefixTextColor="@color/darker">
+        app:layout_constraintVertical_bias="0.287">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:digits="1234567890()- "
-            android:inputType="number"
-            android:maxLength="24"
+            android:inputType="textPersonName"
+            android:maxLength="30"
             android:maxLines="1"
             android:textColor="@color/darkGray"
             android:textSize="18sp" />
@@ -86,63 +81,33 @@
         app:hintTextColor="@color/dark_blue"
         app:layout_constraintEnd_toEndOf="@+id/username_inputLayout"
         app:layout_constraintStart_toStartOf="@+id/username_inputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/username_inputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/username_inputLayout"
+        app:prefixText="+998"
+        app:prefixTextAppearance="@style/PrefixTextAppearance"
+        app:prefixTextColor="@color/darker">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phone_number_edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:digits="1234567890 "
+            android:digits="1234567890()- "
             android:inputType="number"
-            android:maxLength="22"
+            android:maxLength="24"
             android:maxLines="1"
             android:textColor="@color/darkGray"
             android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/username_input_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:text="Username:"
-        android:textColor="@color/darker"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/clear_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/phone_number_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Phone number:"
-        android:textColor="@color/darker"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/username_input_tv"
-        app:layout_constraintStart_toStartOf="@+id/username_input_tv"
-        app:layout_constraintTop_toBottomOf="@+id/username_input_tv" />
-
-
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/clear_button"
+        android:id="@+id/back_button"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/lightGray"
-        android:text="Clear"
+        android:text="Qaytish"
         android:textColor="@color/darkGray"
         app:layout_constraintBottom_toTopOf="@+id/show_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -166,6 +131,18 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="0dp"
+        android:visibility="gone"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        tools:listitem="@layout/user_data_row_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
