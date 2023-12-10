@@ -220,6 +220,11 @@ fun <T> Fragment.observeLiveData(
     }
 }
 
+fun String.to998Format(): String {
+    return "+998${this}"
+}
+
+
 
 
 

@@ -1,6 +1,5 @@
 package pl.ozodbek.datastorepractice.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -10,21 +9,15 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import pl.ozodbek.datastorepractice.R
-import pl.ozodbek.datastorepractice.adapters.UserDataAdapter
-import pl.ozodbek.datastorepractice.data.UserData
 import pl.ozodbek.datastorepractice.databinding.FragmentDataSavingBinding
-import pl.ozodbek.datastorepractice.databinding.FragmentDataViewerBinding
 import pl.ozodbek.datastorepractice.util.Constants.Companion.MASK_FOR_PHONE_NUMBER_INPUT
 import pl.ozodbek.datastorepractice.util.changeFragmentTo
 import pl.ozodbek.datastorepractice.util.fullText
-import pl.ozodbek.datastorepractice.util.gone
 import pl.ozodbek.datastorepractice.util.launchOnIOThread
-import pl.ozodbek.datastorepractice.util.launchOnMainThread
-import pl.ozodbek.datastorepractice.util.observeLiveData
 import pl.ozodbek.datastorepractice.util.onClick
 import pl.ozodbek.datastorepractice.util.oneliner_viewbinding.viewBinding
 import pl.ozodbek.datastorepractice.util.setMask
-import pl.ozodbek.datastorepractice.util.show
+import pl.ozodbek.datastorepractice.util.to998Format
 import pl.ozodbek.datastorepractice.viewmodels.DataViewerViewModel
 
 @AndroidEntryPoint
@@ -51,7 +44,7 @@ class DataSavingFragment : Fragment(R.layout.fragment_data_saving) {
 
     private fun setUpActionBar() {
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (requireActivity() as AppCompatActivity).title = "DataStore"
+        (requireActivity() as AppCompatActivity).title = "DataStore save"
     }
 
 
@@ -70,13 +63,12 @@ class DataSavingFragment : Fragment(R.layout.fragment_data_saving) {
 
 
             if (areFieldsValid(userNameBefore, phoneNumberBefore)) {
-                saveToDataStore(userNameBefore, phoneNumberBefore)
+                saveToDataStore(userNameBefore, phoneNumberBefore.to998Format())
             }
         }
 
         binding.showButton.onClick {
             changeFragmentTo(DataSavingFragmentDirections.actionDataSavingFragmentToDataViewerFragment())
-            clearEditTexts()
         }
     }
 
@@ -91,6 +83,7 @@ class DataSavingFragment : Fragment(R.layout.fragment_data_saving) {
             "$userNameBefore and $phoneNumberBefore saved !",
             Toast.LENGTH_SHORT
         ).show()
+        clearEditTexts()
     }
 
 

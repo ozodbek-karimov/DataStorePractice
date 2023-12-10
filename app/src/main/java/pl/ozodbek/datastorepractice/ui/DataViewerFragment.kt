@@ -14,6 +14,7 @@ import pl.ozodbek.datastorepractice.util.launchOnMainThread
 import pl.ozodbek.datastorepractice.util.observeLiveData
 import pl.ozodbek.datastorepractice.util.onClick
 import pl.ozodbek.datastorepractice.util.oneliner_viewbinding.viewBinding
+import pl.ozodbek.datastorepractice.util.popBackStack
 import pl.ozodbek.datastorepractice.viewmodels.DataViewerViewModel
 
 @AndroidEntryPoint
@@ -33,34 +34,27 @@ class DataViewerFragment : Fragment(R.layout.fragment_data_viewer) {
 
     private fun setupUI() {
         setUpActionBar()
-        readFromDataStore()
+        setupUIElements()
         setupClickListeners()
     }
 
-
+    private fun setUpActionBar() {
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (requireActivity() as AppCompatActivity).title = "DataStore show"
+        binding.toolbar.setNavigationOnClickListener {
+            popBackStack()
+        }
+    }
 
 
     private fun setupClickListeners() {
-       binding.userNameTextview.onClick {
-           readFromDataStore()
+       binding.removeButton.onClick {
+           removeDataFromDataStore()
        }
-
-        binding.phoneNumberTextview.onClick {
-            removeDataFromDataStore()
-        }
-    }
-
-    private fun removeDataFromDataStore() {
-        launchOnIOThread {
-            viewModel.removeUserName()
-            viewModel.removePhoneNumber()
-        }
-        Toast.makeText(requireContext(), "User data removed", Toast.LENGTH_SHORT).show()
-
     }
 
 
-    private fun readFromDataStore() {
+    private fun setupUIElements() {
         launchOnMainThread {
             observeLiveData(viewModel.readUserName) { userName ->
                 observeLiveData(viewModel.readPhoneNumber) { phoneNumber ->
@@ -78,9 +72,18 @@ class DataViewerFragment : Fragment(R.layout.fragment_data_viewer) {
     }
 
 
-    private fun setUpActionBar() {
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (requireActivity() as AppCompatActivity).title = "DataStore"
+    private fun removeDataFromDataStore() {
+        launchOnIOThread {
+            viewModel.removeUserName()
+            viewModel.removePhoneNumber()
+        }
+        clearTextViews()
     }
+
+    private fun clearTextViews() {
+        binding.userNameTextview.text = null
+        binding.phoneNumberTextview.text = null
+    }
+
 
 }
