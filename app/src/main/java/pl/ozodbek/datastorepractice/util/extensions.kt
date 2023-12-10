@@ -15,6 +15,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
@@ -190,6 +191,38 @@ fun View.getColor(color: Int): Int {
     return ContextCompat.getColor(this.context, color)
 }
 
+
+fun <T> Fragment.launchOnMainThread(block: suspend CoroutineScope.() -> T) {
+    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+        block()
+    }
+}
+
+
+fun <T> Fragment.launchOnIOThread(block: suspend CoroutineScope.() -> T) {
+    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+        block()
+    }
+}
+
+fun <T> Fragment.launchOnDefaultThread(block: suspend CoroutineScope.() -> T) {
+    viewLifecycleOwner.lifecycleScope.launch {
+        block()
+    }
+}
+
+fun <T> Fragment.observeLiveData(
+    liveData: LiveData<T>,
+    block: (T) -> Unit,
+) {
+    liveData.observe(viewLifecycleOwner) {
+        block(it)
+    }
+}
+
+fun String.to998Format(): String {
+    return "+998${this}"
+}
 
 
 

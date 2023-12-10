@@ -1,26 +1,30 @@
 package pl.ozodbek.datastorepractice.ui
 
-import android.annotation.SuppressLint
-import android.app.Application
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 import pl.ozodbek.datastorepractice.R
-import pl.ozodbek.datastorepractice.databinding.FragmentDataViewerBinding
+import pl.ozodbek.datastorepractice.databinding.FragmentDataSavingBinding
 import pl.ozodbek.datastorepractice.util.Constants.Companion.MASK_FOR_PHONE_NUMBER_INPUT
+import pl.ozodbek.datastorepractice.util.changeFragmentTo
 import pl.ozodbek.datastorepractice.util.fullText
-import pl.ozodbek.datastorepractice.util.gone
+import pl.ozodbek.datastorepractice.util.launchOnIOThread
 import pl.ozodbek.datastorepractice.util.onClick
 import pl.ozodbek.datastorepractice.util.oneliner_viewbinding.viewBinding
 import pl.ozodbek.datastorepractice.util.setMask
-import pl.ozodbek.datastorepractice.util.show
+import pl.ozodbek.datastorepractice.util.to998Format
+import pl.ozodbek.datastorepractice.viewmodels.DataViewerViewModel
 
+@AndroidEntryPoint
+class DataSavingFragment : Fragment(R.layout.fragment_data_saving) {
 
-class DataViewerFragment : Fragment(R.layout.fragment_data_viewer) {
-
-    private val binding by viewBinding(FragmentDataViewerBinding::bind)
+    private val binding by viewBinding(FragmentDataSavingBinding::bind)
+    private val viewModel: DataViewerViewModel by viewModels()
 
     private var unMuskedValueOfPhoneNumber: String? = null
 
@@ -32,12 +36,17 @@ class DataViewerFragment : Fragment(R.layout.fragment_data_viewer) {
     }
 
 
-
     private fun setupUI() {
         setUpActionBar()
         setupMaskedEditText()
         setupClickListeners()
     }
+
+    private fun setUpActionBar() {
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (requireActivity() as AppCompatActivity).title = "DataStore save"
+    }
+
 
     private fun setupMaskedEditText() {
         binding.phoneNumberEdittext.setMask(MASK_FOR_PHONE_NUMBER_INPUT) {
@@ -46,55 +55,41 @@ class DataViewerFragment : Fragment(R.layout.fragment_data_viewer) {
 
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setupClickListeners() {
-        binding.showButton.onClick {
+
+        binding.saveButton.onClick {
             val userNameBefore = binding.usernameEdittext.fullText
             val phoneNumberBefore = unMuskedValueOfPhoneNumber.toString()
 
 
             if (areFieldsValid(userNameBefore, phoneNumberBefore)) {
-                hideInputLayouts()
-                showTextViews()
-                setTextViewsText()
+                saveToDataStore(userNameBefore, phoneNumberBefore.to998Format())
             }
         }
 
-        binding.clearButton.onClick {
-            clearTextViews()
-            clearEditTexts()
-            showInputLayouts()
+        binding.showButton.onClick {
+            changeFragmentTo(DataSavingFragmentDirections.actionDataSavingFragmentToDataViewerFragment())
         }
     }
 
-    private fun hideInputLayouts() {
-        binding.usernameInputLayout.gone()
-        binding.phoneNumberInputLayout.gone()
+
+    private fun saveToDataStore(userNameBefore: String, phoneNumberBefore: String) {
+        launchOnIOThread {
+            viewModel.saveeUserName(userNameBefore)
+            viewModel.saveePhoneNumber(phoneNumberBefore)
+        }
+        Toast.makeText(
+            requireContext(),
+            "$userNameBefore and $phoneNumberBefore saved !",
+            Toast.LENGTH_SHORT
+        ).show()
+        clearEditTexts()
     }
 
-    private fun showTextViews() {
-        binding.usernameInputTv.show()
-        binding.phoneNumberTv.show()
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun setTextViewsText() {
-        binding.phoneNumberTv.text = "+998$unMuskedValueOfPhoneNumber"
-
-    }
-
-    private fun clearTextViews() {
-        binding.usernameInputTv.text = null
-        binding.phoneNumberTv.text = null
-    }
 
     private fun clearEditTexts() {
+        binding.usernameEdittext.text = null
         binding.phoneNumberEdittext.text = null
-    }
-
-    private fun showInputLayouts() {
-        binding.usernameInputLayout.show()
-        binding.phoneNumberInputLayout.show()
     }
 
     private fun areFieldsValid(
@@ -126,9 +121,5 @@ class DataViewerFragment : Fragment(R.layout.fragment_data_viewer) {
         inputLayout.error = errorMessage
     }
 
-    private fun setUpActionBar() {
-        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (requireActivity() as AppCompatActivity).title = "MaskedEditText"
-    }
 
 }

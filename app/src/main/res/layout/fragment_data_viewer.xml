@@ -3,169 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/custom"
     android:layout_height="match_parent"
+    android:background="@color/custom"
     tools:context=".ui.DataViewerFragment">
-
 
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/permission_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_inputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:hint="@string/username"
-        android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
-        android:visibility="visible"
-        app:boxBackgroundColor="@color/lightGray"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxStrokeColor="@color/color_state_selector"
-        app:boxStrokeErrorColor="@color/red"
-        app:boxStrokeWidth="1.50dp"
-        app:boxStrokeWidthFocused="2dp"
-        app:cursorColor="@color/blue"
-        app:cursorErrorColor="@color/red"
-        app:errorEnabled="true"
-        app:errorIconDrawable="@null"
-        app:hintTextColor="@color/dark_blue"
-        app:layout_constraintBottom_toTopOf="@+id/clear_button"
+        android:background="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287"
-        app:prefixText="+998"
-        app:prefixTextAppearance="@style/PrefixTextAppearance"
-        app:prefixTextColor="@color/darker">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:digits="1234567890()- "
-            android:inputType="number"
-            android:maxLength="24"
-            android:maxLines="1"
-            android:textColor="@color/darkGray"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone_number_inputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/phonenumber"
-        android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
-        android:visibility="visible"
-        app:boxBackgroundColor="@color/lightGray"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxStrokeColor="@color/color_state_selector"
-        app:boxStrokeErrorColor="@color/red"
-        app:boxStrokeWidth="1.50dp"
-        app:boxStrokeWidthFocused="2dp"
-        app:cursorColor="@color/blue"
-        app:cursorErrorColor="@color/red"
-        app:errorEnabled="true"
-        app:errorIconDrawable="@null"
-        app:hintTextColor="@color/dark_blue"
-        app:layout_constraintEnd_toEndOf="@+id/username_inputLayout"
-        app:layout_constraintStart_toStartOf="@+id/username_inputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/username_inputLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phone_number_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:digits="1234567890 "
-            android:inputType="number"
-            android:maxLength="22"
-            android:maxLines="1"
-            android:textColor="@color/darkGray"
-            android:textSize="18sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
+        app:navigationIcon="@drawable/ic_up_button" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/username_input_tv"
-        android:layout_width="0dp"
+        android:id="@+id/user_name_textview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:text="Username:"
-        android:textColor="@color/darker"
+        android:text="UserName"
+        android:textColor="@color/lightGray"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/clear_button"
+        app:layout_constraintBottom_toTopOf="@+id/remove_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.255" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/phone_number_tv"
-        android:layout_width="0dp"
+        android:id="@+id/phone_number_textview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Phone number:"
-        android:textColor="@color/darker"
+        android:layout_marginTop="30dp"
+        android:text="PhoneNumber"
+        android:textColor="@color/lightGray"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/username_input_tv"
-        app:layout_constraintStart_toStartOf="@+id/username_input_tv"
-        app:layout_constraintTop_toBottomOf="@+id/username_input_tv" />
-
+        app:layout_constraintEnd_toEndOf="@+id/user_name_textview"
+        app:layout_constraintStart_toStartOf="@+id/user_name_textview"
+        app:layout_constraintTop_toBottomOf="@+id/user_name_textview" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/clear_button"
+        android:id="@+id/remove_button"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/lightGray"
-        android:text="Clear"
-        android:textColor="@color/darkGray"
-        app:layout_constraintBottom_toTopOf="@+id/show_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/blue"
-        app:strokeWidth="2dp" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/show_button"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:backgroundTint="@color/blue"
-        android:text="Show"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/red"
+        android:text="Remove"
         android:textColor="@color/lightGray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

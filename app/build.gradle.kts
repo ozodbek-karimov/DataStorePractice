@@ -55,7 +55,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-
     //Hilt
     implementation("com.google.dagger:hilt-android:2.48.1")
     ksp("com.google.dagger:dagger-compiler:2.48.1")
@@ -71,5 +70,9 @@ dependencies {
 
     //Masked Edittext
     implementation("com.redmadrobot:input-mask-android:7.2.4")
+
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
 
 }
